@@ -17,11 +17,16 @@ const send_sms = sendSMS({
     secretid: 'rfiz45dm'
 })
 
+const get_message = getMessage({
+    clientid: 'bxd34kou',
+    secretid: 'rfiz45dm'
+})
+
 apiRoutes.post('/send_message', async (req, res)=>{
 
   let data =  await send_sms({
     from:'Wisdom',
-    To: "+233248183797", 
+    To: "+233509878941", 
     Content: "hello, world!",
     RegisteredDelivery: true
 })
@@ -30,7 +35,7 @@ return res.json(data)
 })
 
 apiRoutes.post('/get_message', async (req, res)=>{
-    let data = await getMessage('jfhfhfjfjfjfhfjhfjfj')
+    let data = await get_message('jfhfhfjfjfjfhfjhfjfj')
     return res.json(data)
 })
 

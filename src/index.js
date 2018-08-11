@@ -17,12 +17,11 @@ const hubtelsms = {
                 let url = `https://api.hubtel.com/v1/messages`;
                    let auth = "Basic " + new Buffer(config.clientid + ":" + config.secretid).toString("base64")
                 var options = {
-                    body: JSON.stringify(params),
+                    body: params,
                      headers : {
                               "Authorization" : auth,
-                              "content-type":"application/json",
-                              "content-type": "application/x-www-form-urlencoded"
-                          }
+                          },
+                          json: true
                    }
           
                 request.post(url, options, (err, response, body) => {
@@ -35,12 +34,23 @@ const hubtelsms = {
         /**
  * Get the details of already sent messages by providing the messageId
  * @param {string} params
+ * @param {object} config
 
  */
-    getMessage:(messageId)=>{
+    getMessage:(config)=>(messageId)=>{
+        if(!config.secretid ||  !config.clientid){
+            throw ('required parameters not provided')
+        }
         return new Promise((resolve, reject)=>{
             let url = `https://api.hubtel.com/v1/messages/${messageId}`
-            request.get(url, (err, response, body)=>{
+            let auth = "Basic " + new Buffer(config.clientid + ":" + config.secretid).toString("base64")
+            var options = {
+                 headers : {
+                          "Authorization" : auth,
+                      },
+                      json: true
+               }
+            request.get(url, options, (err, response, body)=>{
                 console.log(body)
                 return err? reject(err):resolve(body)
             })
