@@ -1,6 +1,7 @@
 
 
-const request = require('request') 
+const request = require('request')
+ const querystring = require('querystring')
 
 
 const hubtelsms = {
@@ -57,7 +58,98 @@ const hubtelsms = {
 
 
         })
+    },
+/** 
+    * get all messages. You can provide in some query parameters
+    * @param {string} params
+    * @param {object} config
+   
+    */
+
+    query_message:(config)=>(params)=>{
+        if(!config.secretid ||  !config.clientid){
+            throw ('required parameters not provided')
+        }
+    return new Promise((resolve, reject)=>{
+        var query_params = querystring.stringify(params)
+        var url = `https://api.hubtel.com/v1/messages?${query_params}`
+        console.log(url)
+        var auth = 'Basic'+ new Buffer(config.clientid + ":" +config.secretid).toString("base64")
+        var options = {
+            headers : {
+                     "Authorization" : auth,
+                 },
+                 json: true
+          }
+          request.get(url, options, (err, response, body)=>{
+              return err? reject(err):resolve(body)
+              console.log(body)
+          })
+    })
+
+
+    },
+    /** 
+    * Rescheduled a scheduled messages by providing the messageId, datetime 
+    * @param {string} messageId
+    * @param {object} config
+    * @param {datetime} time
+   
+    */
+   rescheduleMessage:(config)=>(messageId, time)=>{
+    if(!config.secretid ||  !config.clientid){
+        throw ('required parameters not provided')
     }
+return new Promise((resolve, reject)=>{
+    var url = `https://api.hubtel.com/v1/messages/${messageId}`
+    var auth = 'Basic'+ new Buffer(config.clientid + ':' + config.secretid).toString('base64')
+    var options = {
+        body:{"Time": time},
+        headers:{
+            "Authorization" : auth,
+        },
+        json: true
+    }
+
+    request.put(url, options, (err, response, body)=>{
+        return err?reject(err):resolve(body)
+    })
+
+})
+
+   },
+
+
+
+        /**
+ * cancel already scheduled messages by providing the messageId
+ * @param {string} messageId
+ * @param {object} config
+
+ */
+
+ cancelMessage: (config)=>(messageId)=>{
+    if(!config.secretid ||  !config.clientid){
+        throw ('required parameters not provided')
+    }
+
+    return new Promise((resolve, reject)=>{
+        var auth = 'Basic'+ new Buffer(config.clientid + ':' + config.secretid).toString('base64')
+        var url = `https://api.smsgh.com/v3/messages/${messageId}`
+        var options = {
+            headers:{
+                "Authorization" : auth,
+            },
+            json:true
+        }
+
+    request.delete(url, options, (err, response, body)=>{
+        return err?reject(err):resolve(body)
+    })
+
+    })
+
+ }
 
 }
 
