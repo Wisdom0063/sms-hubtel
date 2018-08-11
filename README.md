@@ -1,0 +1,1 @@
+# An npm package for sending message, scheduling message and retrieving data of an existing message using the hubtel send message api
