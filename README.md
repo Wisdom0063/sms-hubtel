@@ -1,16 +1,21 @@
-## An npm package for sending message, scheduling and rescheduling message and retrieving data of an existing message, getting all messages, and cancelling scheduled messages using the hubtel send message api
+### An npm package for sending message, scheduling and rescheduling message and retrieving data of an existing message, getting all messages, and cancelling scheduled messages using the hubtel send message api
 
-### Usage
+## Usage
 
+```javascript
 const hubtelSMS = require("../src/index");
+```
 
+```javascript
 const SMS = hubtelSMS({
-clientid: "HubtelApplicationClientId",
-secretid: "HubtelApplicationSecreteId"
+  clientid: "HubtelApplicationClientId",
+  secretid: "HubtelApplicationSecreteId"
 });
+```
 
-## Send Message
+##@ Send Message
 
+```javascript
 SMS.sendSMS({
 From: "Wisdom",
 To: "+233509878941",
@@ -35,5 +40,6 @@ Example is {
 "RegisteredDelivery": "true",
 "Time": "2014-01-01 10:00:00"
 }
+```
 
 Please visit https://developers.hubtel.com/documentations/sendmessage for more information
