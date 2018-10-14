@@ -11,17 +11,16 @@ app.use("/api/v1", apiRoutes);
 const hubtelSMS = require("../src/index");
 
 const SMS = hubtelSMS({
-  clientid: "HubtelApplicationClientId",
-  secretid: "HubtelApplicationSecreteId"
+  clientid: "HubtelClientID",
+  secretid: "HubtelSecreteID"
 });
 
-// base url is http://localhost:2000/api/v1/
 apiRoutes.post("/send_message", async (req, res) => {
   let data = await SMS.sendSMS({
     From: "smsgh",
     To: "+233248183797",
     Content: "hello, world!",
-    RegisteredDelivery: "true"
+    RegisteredDelivery: true
   });
   return res.json(data);
 });

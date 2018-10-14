@@ -4,10 +4,12 @@ const isRequired = str => {
   throw new Error(`${str} is required`);
 };
 
-function hubtelsms({
-  clientid = isRequired("clientid"),
-  secretid = isRequired("secretid")
-}) {
+function hubtelsms(
+  {
+    clientid = isRequired("clientid"),
+    secretid = isRequired("secretid")
+  } = isRequired("object parameter with client and secrete Id's is required")
+) {
   const config = { clientid, secretid };
   /**
  * Send sms or reschedule sms. Note for rescheduling you must add a time to the request body
@@ -35,7 +37,7 @@ function hubtelsms({
   };
   /**
  * Get the details of already sent messages by providing the messageId
- * @param {string} params
+ * @param {string} messageId
 
  */
   const getMessage = (messageId = isRequired("messageId")) => {
@@ -61,12 +63,14 @@ function hubtelsms({
    
     */
 
-  const queryMessage = (params = isRequired("query parameters")) => {
+  const queryMessage = params => {
     return new Promise((resolve, reject) => {
       var query_params = querystring.stringify(params);
-      var url = `https://api.hubtel.com/v1/messages?${query_params}`;
-      var auth =
-        "Basic" +
+      var url = params
+        ? `https://api.hubtel.com/v1/messages?${query_params}`
+        : "https://api.hubtel.com/v1/messages";
+      let auth =
+        "Basic " +
         new Buffer(config.clientid + ":" + config.secretid).toString("base64");
       var options = {
         headers: {
@@ -91,8 +95,8 @@ function hubtelsms({
   ) => {
     return new Promise((resolve, reject) => {
       var url = `https://api.hubtel.com/v1/messages/${messageId}`;
-      var auth =
-        "Basic" +
+      let auth =
+        "Basic " +
         new Buffer(config.clientid + ":" + config.secretid).toString("base64");
       var options = {
         body: { Time: time },
@@ -118,9 +122,9 @@ function hubtelsms({
   const cancelMessage = (messageId = isRequired("messageId")) => {
     return new Promise((resolve, reject) => {
       var auth =
-        "Basic" +
+        "Basic " +
         new Buffer(config.clientid + ":" + config.secretid).toString("base64");
-      var url = `https://api.smsgh.com/v3/messages/${messageId}`;
+      var url = `https://api.hubtel.com/v1/messages/${messageId}`;
       var options = {
         headers: {
           Authorization: auth
