@@ -1,5 +1,5 @@
 {
-  "name": "hubtelsms",
+  "name": "sms-hubtel",
   "version": "1.0.0",
   "description": "An npm package for sending message, scheduling message and retrieving data of an existing message using the hubtel send message api",
   "main": "index.js",
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wisdom0063/hubtelsms.git"
+    "url": "git+https://github.com/Wisdom0063/sms-hubtel.git"
   },
   "keywords": [
     "Hubtel",
@@ -31,7 +31,7 @@
   "author": "Wisdom Kwarteng",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Wisdom0063/hubtelsms/issues"
+    "url": "https://github.com/Wisdom0063/sms-hubtel/issues"
   },
-  "homepage": "https://github.com/Wisdom0063/hubtelsms#readme"
+  "homepage": "https://github.com/Wisdom0063/sms-hubtel#readme"
 }
