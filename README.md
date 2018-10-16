@@ -3,7 +3,7 @@
 ## Usage
 
 ```javascript
-const hubtelSMS = require("../src/index");
+const hubtelSMS = require("sns-hubtel");
 ```
 
 ```javascript
@@ -17,7 +17,7 @@ const SMS = hubtelSMS({
 
 ```javascript
 SMS.sendSMS({
-  From: "Wisdom", //Sender
+  From: "Sender", //Sender
   To: "+233509879941", //Receiver
   Content: "hello, world!",
   RegisteredDelivery: true
@@ -105,27 +105,27 @@ Sample Response
       "Rate": 0,
       "Units": 1,
       "MessageId": "c1fc94c4-3c3e-4750-9176-966959d93620",
-      "Content": "Hello Wisdom",
+      "Content": "Hello John",
       "Status": "Out of Credit",
       "NetworkId": "62002",
       "UpdateTime": "2018-10-14 12:17:08",
       "Time": "2018-10-14 12:17:08",
       "Direction": "out",
       "To": "+233509879941",
-      "From": "Wisdom"
+      "From": "John"
     },
     {
       "Rate": 0,
       "Units": 1,
       "MessageId": "190cbcc7-8368-456c-a412-f5f754abcd71",
-      "Content": "Hello Wisdom",
+      "Content": "Hello John",
       "Status": "Out of Credit",
       "NetworkId": "62002",
       "UpdateTime": "2018-10-14 14:15:05",
       "Time": "2018-10-14 14:15:05",
       "Direction": "out",
       "To": "+233509879941",
-      "From": "Wisdom"
+      "From": "John"
     }
   ]}
   ,
