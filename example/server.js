@@ -8,7 +8,7 @@ app.use(morgan("dev"));
 const apiRoutes = express.Router();
 app.use("/api/v1", apiRoutes);
 
-const hubtelSMS = require("../src/index");
+const hubtelSMS = require("../index");
 
 const SMS = hubtelSMS({
   clientid: "HubtelClientID",

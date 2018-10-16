@@ -1,7 +1,7 @@
 const { assert, expect } = require("chai");
 const should = require("chai").should();
 const mock = require("nock");
-const hubtelsms = require("../src/index");
+const hubtelsms = require("../index");
 
 describe("hubtel sms", () => {
   let config, sms, hubtelSMSUrl, mockRequest, url;
