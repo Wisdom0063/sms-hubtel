@@ -1,4 +1,4 @@
-## An npm package for sending message, scheduling and rescheduling message and retrieving data of an existing message, getting all messages, and cancelling scheduled messages using the hubtel send message api
+## An npm package for sending messages, scheduling and rescheduling message, retrieving data of an existing message, getting all messages and cancelling scheduled messages using the hubtel send message api
 
 ## Usage
 
