@@ -3,7 +3,7 @@
 ## Usage
 
 ```javascript
-const hubtelSMS = require("sns-hubtel");
+const hubtelSMS = require("sms-hubtel");
 ```
 
 ```javascript
