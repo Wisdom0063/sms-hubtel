@@ -1,6 +1,6 @@
 {
   "name": "sms-hubtel",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An npm package for sending message, scheduling message and retrieving data of an existing message using the hubtel send message api",
   "main": "index.js",
   "dependencies": {
