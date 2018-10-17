@@ -5,7 +5,7 @@ const hubtelsms = require("../index");
 
 describe("hubtel sms", () => {
   let config, sms, hubtelSMSUrl, mockRequest, url;
-  beforeEach(() => {
+  before(() => {
     config = {
       clientid: "v=u+at",
       secretid: "F=ma"
@@ -14,8 +14,26 @@ describe("hubtel sms", () => {
     url = "https://api.hubtel.com/v1/messages/";
   });
 
+  describe("configuration", () => {
+    it("it should throw an error with no configuration object provided", async () => {
+      expect(() => hubtelsms()).throw(
+        "object parameter with client and secrete Id's is required"
+      );
+    });
+    it("it should throw an error with no clientid provided", async () => {
+      expect(() => hubtelsms({ secretid: "v=u+at" })).throw(
+        "clientid is required"
+      );
+    });
+    it("it should throw an error with no secretid provided", async () => {
+      expect(() => hubtelsms({ clientid: "v=u+at" })).throw(
+        "secretid is required"
+      );
+    });
+  });
+
   describe("send sms", () => {
-    beforeEach(() => {
+    before(() => {
       hubtelSMSUrl = url;
       mockRequest = mock(hubtelSMSUrl, {
         reqheaders: {
@@ -26,6 +44,9 @@ describe("hubtel sms", () => {
             )
         }
       }).post("", {});
+    });
+    it("it should throw an error with message parameters is required", async () => {
+      expect(() => sms.sendSMS()).throw("message parameters is required");
     });
     it("it should resolve and return an object", async () => {
       mockRequest.reply(200, {
@@ -49,7 +70,7 @@ describe("hubtel sms", () => {
   describe("get message", () => {
     let messageId = "43cceb19d2a242f58fb338692e12c0bb";
     hubtelSMSUrl = url + messageId;
-    beforeEach(() => {
+    before(() => {
       mockRequest = mock(hubtelSMSUrl, {
         reqheaders: {
           Authorization:
@@ -59,6 +80,9 @@ describe("hubtel sms", () => {
             )
         }
       }).get(`/`);
+    });
+    it("it should throw an error with messageId is required", async () => {
+      expect(() => sms.getMessage()).throw("messageId is required");
     });
     it("it should resolve and return an object", async () => {
       mockRequest.reply(200, {
@@ -86,7 +110,7 @@ describe("hubtel sms", () => {
   });
   describe("query message", () => {
     hubtelSMSUrl = url;
-    beforeEach(() => {
+    before(() => {
       mockRequest = mock(hubtelSMSUrl, {
         reqheaders: {
           Authorization:
@@ -130,7 +154,7 @@ describe("hubtel sms", () => {
   describe("Reschedule scheduled message", () => {
     let messageId = "43cceb19d2a242f58fb338692e12c0bb";
     hubtelSMSUrl = url;
-    beforeEach(() => {
+    before(() => {
       mockRequest = mock(hubtelSMSUrl, {
         reqheaders: {
           Authorization:
@@ -142,6 +166,12 @@ describe("hubtel sms", () => {
       }).put("/6f19395db2fb497ea4ebd1e218dd3e4c", {
         Time: "2013-08-12 17:11:42"
       });
+    });
+    it("it should throw an error with messageId is required", async () => {
+      expect(() => sms.rescheduleMessage()).throw("messageId is required");
+    });
+    it("it should throw an error with time is required", async () => {
+      expect(() => sms.rescheduleMessage("")).throw("time is required");
     });
     it("it should resolve and return an object", async () => {
       mockRequest.reply(200, {
@@ -165,9 +195,8 @@ describe("hubtel sms", () => {
     });
   });
   describe("Cancel scheduled message", () => {
-    let messageId = "43cceb19d2a242f58fb338692e12c0bb";
     hubtelSMSUrl = url;
-    beforeEach(() => {
+    before(() => {
       mockRequest = mock(hubtelSMSUrl, {
         reqheaders: {
           Authorization:
@@ -177,6 +206,9 @@ describe("hubtel sms", () => {
             )
         }
       }).delete("/6f19395db2fb497ea4ebd1e218dd3e4c");
+    });
+    it("it should throw an error with messageId is required", async () => {
+      expect(() => sms.cancelMessage()).throw("messageId is required");
     });
     it("it should resolve and return an object", async () => {
       mockRequest.reply(200, {
